@@ -32,6 +32,37 @@ for (i in startyear:endyear){
   passing <- rbind(table, passing)
 }
 
+
+# take a look at column names 
+colnames(passing)
+# need to change these column names to be readable
+# duplicate Yds columns with different meanings:
+colnames(passing)[12] <- "Yards_Thrown"
+colnames(passing)[27] <- "Yards_Lost_Sack"
+# piping column name changes
+passing <- passing %>%
+  rename('Games_Played' = 'G',
+         'Games_Started' = 'GS',
+         'QB_Record'= 'QBrec',
+         'Completions' = 'Cmp',
+         'Attempts' = 'Att',
+         'Completion_Percent' = 'Cmp%',
+         'Passing_TD' = 'TD',
+         'TD_Percentage' = 'TD%',
+         'Interceptions' = 'Int',
+         'Interception_Percentage' = 'Int%',
+         'First_Downs'= '1D',
+         'Passing_Success_Rate' = 'Succ%',
+         'Longest_Pass' = 'Lng',
+         'Yards_Per_Pass_Attempt' = 'Y/A',
+         'Yards_Per_Pass_Complete' = 'Y/C',
+         'Yards_Per_Game' = 'Y/G',
+         'Sacks' = 'Sk')
+
+# drop columns that are not relevant by column name
+passing <- select(passing, -c('QBR', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', 'Awards', 'AY/A', 'Rate'))
+colnames(passing)
+
 # save scraped data into new csv file
 write.csv(passing, file = "pro-football-reference-2010-2024-passing.csv", row.names = TRUE)
 ```
