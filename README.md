@@ -70,7 +70,7 @@ for (i in startyear:endyear) {
 }
 
 write.csv(passing, "pro-football-reference-2010-2024-passing.csv", row.names = FALSE)
-
+```
 ---
 
 # 📊 NFL Analysis – Results & Visuals
@@ -105,4 +105,4 @@ ggplot(passing, aes(x = Year, y = Yds, color = Tm)) +
   labs(title = "Quarterback Passing Yards by Year",
        x = "Season",
        y = "Passing Yards")
-
+```
