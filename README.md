@@ -37,21 +37,36 @@ Ensure you have the following installed:
   install.packages(c("rvest", "tidyverse", "dplyr"))
 
 ---
+---
 
-NFL-Analysis/
-│
-├── Data/
-│   ├── pro-football-reference-2010-2024-passing.csv
-│   ├── pro-football-reference-2010-2024-receiving.csv
-│   ├── pro-football-reference-2010-2024-rushing.csv
-│
-├── src/
-│   ├── passing_scraper.R
-│   ├── rushing_scraper.R
-│   ├── receiving_scraper.R
-│
-├── visuals/
-│   ├── passing_trends.png
-│   ├── rushing_distribution.png
-│
-└── README.md
+## 🗂️ Data Collection
+
+### Data Sources
+
+All data is sourced from:
+- [Pro-Football-Reference – Passing](https://www.pro-football-reference.com/years/2024/passing.htm)  
+- [Pro-Football-Reference – Rushing](https://www.pro-football-reference.com/years/2024/rushing.htm)  
+- [Pro-Football-Reference – Receiving](https://www.pro-football-reference.com/years/2024/receiving.htm)  
+
+### Methodology
+
+Data is scraped from yearly tables for each stat type using the **rvest** library in R:
+
+```r
+urlprefix <- "https://www.pro-football-reference.com/years/"
+urlend <- '/passing.htm'
+startyear <- 2010
+endyear <- 2024
+passing <- data.frame()
+
+for (i in startyear:endyear) {
+  url <- paste0(urlprefix, i, urlend)
+  table <- url %>%
+    read_html() %>%
+    html_node("table") %>%
+    html_table()
+  table$Year <- i
+  passing <- rbind(table, passing)
+}
+
+write.csv(passing, "pro-football-reference-2010-2024-passing.csv", row.names = FALSE)
