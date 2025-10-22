@@ -70,3 +70,39 @@ for (i in startyear:endyear) {
 }
 
 write.csv(passing, "pro-football-reference-2010-2024-passing.csv", row.names = FALSE)
+
+---
+
+# 📊 NFL Analysis – Results & Visuals
+
+This document showcases the results and visual insights generated from the **NFL Analysis** project.  
+The visuals highlight trends, distributions, and player performance patterns from data scraped via [Pro-Football-Reference.com](https://www.pro-football-reference.com).
+
+---
+
+## 🏈 Overview
+
+Using the cleaned datasets (`passing`, `rushing`, and `receiving` stats from 2010–2024), we explore:
+
+- Long-term performance trends by year  
+- Team and player efficiency across positions  
+- Distribution of yardage and touchdowns  
+- Seasonal comparisons and career trajectories  
+
+These graphics are designed to make league-wide patterns and player development more interpretable for analysts, scouts, and fans alike.
+
+---
+
+## 📈 Passing Trends
+
+### Quarterback Passing Yards by Year
+
+Shows the evolution of total passing yards across NFL seasons, highlighting the league’s shift toward high-volume passing offenses.
+
+```r
+ggplot(passing, aes(x = Year, y = Yds, color = Tm)) +
+  geom_line(alpha = 0.7) +
+  labs(title = "Quarterback Passing Yards by Year",
+       x = "Season",
+       y = "Passing Yards")
+
