@@ -35,3 +35,23 @@ Ensure you have the following installed:
 - Required packages:  
   ```r
   install.packages(c("rvest", "tidyverse", "dplyr"))
+
+---
+
+NFL-Analysis/
+│
+├── Data/
+│   ├── pro-football-reference-2010-2024-passing.csv
+│   ├── pro-football-reference-2010-2024-receiving.csv
+│   ├── pro-football-reference-2010-2024-rushing.csv
+│
+├── src/
+│   ├── passing_scraper.R
+│   ├── rushing_scraper.R
+│   ├── receiving_scraper.R
+│
+├── visuals/
+│   ├── passing_trends.png
+│   ├── rushing_distribution.png
+│
+└── README.md
